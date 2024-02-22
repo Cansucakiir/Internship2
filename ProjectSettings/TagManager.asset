@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Free
+  - Die
+  - Road
+  - Big Obstacle
+  - Small Obstacle
   layers:
   - Default
   - TransparentFX
