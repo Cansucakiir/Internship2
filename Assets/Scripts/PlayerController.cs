@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float valueForce = 115.0f;
     private float gravityValue = 20f;
     private bool isOnTheGround = true;
+    public int control = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,5 +39,17 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         isOnTheGround = true;
+    }
+   
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Prefab"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("Road"))
+        {
+            control += 1;
+        }
     }
 }

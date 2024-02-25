@@ -7,9 +7,11 @@ TagManager:
   - Wall
   - Free
   - Die
+  - "Sars\u0131lma"
+  - Coin
+  - Pantoon
+  - Prefab
   - Road
-  - Big Obstacle
-  - Small Obstacle
   layers:
   - Default
   - TransparentFX
