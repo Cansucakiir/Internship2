@@ -12,6 +12,9 @@ TagManager:
   - Pantoon
   - Prefab
   - Road
+  - Die2
+  - Ground
+  - PlayerChild
   layers:
   - Default
   - TransparentFX

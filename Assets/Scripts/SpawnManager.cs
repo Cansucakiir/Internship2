@@ -19,6 +19,8 @@ public class SpawnManager : MonoBehaviour
     {
         pool = GameObject.Find("Object Pool").GetComponent<ObjectPool>();
         Spawn2();
+        
+
     }
     
     public void Spawn1()
