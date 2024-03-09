@@ -15,6 +15,7 @@ TagManager:
   - Die2
   - Ground
   - PlayerChild
+  - "Sars\u0131lma2"
   layers:
   - Default
   - TransparentFX
