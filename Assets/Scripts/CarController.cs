@@ -9,12 +9,14 @@ public class CarController : MonoBehaviour
     private float distance;
     private float distance2;
     private GameObject player;
-    
+    private PlayerController playerController;
+
     void Start()
     {
         player = GameObject.Find("Character");
+        playerController = player.GetComponent<PlayerController>();
         speed = 120;
-        distance = 1000;
+        distance = 980;
         
     }
 
@@ -22,7 +24,7 @@ public class CarController : MonoBehaviour
     void Update()
     {
         distance2 = Vector3.Distance(transform.position, player.transform.position);
-        if (distance2 < distance)
+        if (distance2 < distance && playerController.isAlive)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }

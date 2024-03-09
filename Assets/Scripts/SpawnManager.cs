@@ -17,10 +17,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        pool = GameObject.Find("Object Pool").GetComponent<ObjectPool>();
+        pool = GameObject.Find("ObjectPool").GetComponent<ObjectPool>();
         Spawn2();
-        
-
     }
     
     public void Spawn1()
@@ -28,8 +26,7 @@ public class SpawnManager : MonoBehaviour
         randomNumber = Random.Range(0,2);
         obj = pool.GetObject(randomNumber);
         if (randomNumber == 0)
-        {
-          
+        {       
             obj.transform.position = spawnPosition1.transform.position;
         }
         if (randomNumber == 1)
@@ -44,13 +41,11 @@ public class SpawnManager : MonoBehaviour
         randomNumber = Random.Range(2,4);
         obj2 = pool.GetObject(randomNumber);
         if (randomNumber == 2)
-        {
-           
+        { 
             obj2.transform.position = spawnPosition3.transform.position;
         }
         if (randomNumber == 3)
-        {
-            
+        {           
             obj2.transform.position = spawnPosition4.transform.position;
         }
     }

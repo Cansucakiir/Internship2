@@ -9,16 +9,18 @@ public class BallController : MonoBehaviour
     private float turnSpeed;
     private Vector3 movement;
     private GameObject player;
+    private PlayerController playerController;
     private float distance;
     private float distance2;
 
     void Start()
     {
         player = GameObject.Find("Character");
-        speed = 5;
+        playerController = player.GetComponent<PlayerController>();
+        speed = 4;
         turnSpeed = 70;
         movement = new Vector3(0,0,-1);
-        distance = 1000;
+        distance = 950;
         
     }
 
@@ -26,11 +28,11 @@ public class BallController : MonoBehaviour
     void Update()
     {
         distance2 = Vector3.Distance(transform.position, player.transform.position);
-        if (distance2< distance)
+        if (distance2< distance && playerController.isAlive)
         {
             transform.Rotate(Vector3.left * turnSpeed * Time.deltaTime);
             transform.position += movement * speed;
-            Debug.Log("mesafe kýsaldý");
+          
         }
         
     }
