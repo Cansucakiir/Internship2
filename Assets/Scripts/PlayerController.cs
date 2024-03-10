@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public int speed;
     private int turnSpeed;
     private float valueForce;
-    private float gravityValue;
+    public float gravityValue;
     public int control;
     private Rigidbody rb;
     [SerializeField] private Collider capsuleCollider;
@@ -43,8 +43,9 @@ public class PlayerController : MonoBehaviour
         gravityValue = 20f;
         gameOverPanel.SetActive(false);
         warningPanel.SetActive(false);
-        animator = this.gameObject.GetComponent<Animator>();
+        Physics.gravity = new Vector3(0, -9.8f, 0);
         Physics.gravity *= gravityValue;
+        animator = this.gameObject.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         sphereCollider = transform.GetChild(2).transform.GetChild(0).GetComponent<SphereCollider>();
         capsuleCollider2 = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).GetComponent<CapsuleCollider>();
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
         playerPosition = transform.position;
         horizontalInput = Input.GetAxis("Horizontal");
         if (isAlive)
@@ -97,7 +99,6 @@ public class PlayerController : MonoBehaviour
         if (speed <= MaxSpeed)
         {
             speed += 10;
-            gravityValue += 10;
             if (speed >= 160)
             {
                 animator.SetFloat("runSpeed", 1.4f);
@@ -131,7 +132,37 @@ public class PlayerController : MonoBehaviour
         {
             DeathControl();
         }
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            score.isScore = false;
+            health.health -= 1;
+            if (health.health < 0)
+            {
+                health.health = 0;
+            }
+            if (health.health > 0)
+            {
+                AudioManager.instance.PlayDeathSound();
+                isAlive = false;
+                animator.SetBool(IsFainting, true);
+                StartCoroutine(OtherGetAlive());
+                collision.gameObject.transform.position += Vector3.forward * 100f;
+
+            }
+            if (health.health < 1)
+            {
+                AudioManager.instance.PlayGameOverSound();
+                isAlive = false;
+                gameOverPanel.SetActive(true);
+                score.CheckAndUpdateHighScore();
+                animator.SetBool(IsDying, true);
+            }
+        }
         if (collision.gameObject.CompareTag("Sarsýlma"))
+        {
+            Shaking();
+        }
+        if (collision.gameObject.CompareTag("Car"))
         {
             Shaking();
         }
@@ -154,6 +185,33 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Sarsýlma"))
         {
             DeathControl();
+        }
+        if (other.gameObject.CompareTag("Car"))
+        {
+            score.isScore = false;
+            health.health -= 1;
+            if (health.health < 0)
+            {
+                health.health = 0;
+            }
+            if (health.health > 0)
+            {
+                AudioManager.instance.PlayDeathSound();
+                isAlive = false;
+                animator.SetBool(IsFainting, true);
+                StartCoroutine(OtherGetAlive());
+                other.gameObject.transform.position += Vector3.forward * 100f;
+
+            }
+            if (health.health < 1)
+            {
+                AudioManager.instance.PlayGameOverSound();
+                isAlive = false;
+                gameOverPanel.SetActive(true);
+                score.CheckAndUpdateHighScore();
+                animator.SetBool(IsDying, true);
+            }
+
         }
         if (other.gameObject.CompareTag("Sarsýlma2"))
         {
@@ -178,6 +236,18 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         isAlive = true;
     }
+    IEnumerator OtherGetAlive()
+    {
+        yield return new WaitForSeconds(3f);
+        animator.SetBool(IsFainting, false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(gameManager.Countdown());
+        score.isScore = true;
+        StartCoroutine(score.IncreaseScore());
+        yield return new WaitForSeconds(3f);
+        isAlive = true;
+    }
+
     IEnumerator WarningPanel()
     {
         for (int i=0; i < 3; i++)
@@ -214,6 +284,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool(IsDying, true);
         }
     }
+
     void Shaking()
     {
         AudioManager.instance.PlayCrushSound();

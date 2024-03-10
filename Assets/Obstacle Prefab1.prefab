@@ -4498,7 +4498,7 @@ GameObject:
   - component: {fileID: 8984710505342925147}
   m_Layer: 0
   m_Name: Obstacle Sphere 1
-  m_TagString: Die
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5839,7 +5839,7 @@ GameObject:
   - component: {fileID: 3314471427441833715}
   m_Layer: 0
   m_Name: Car 1
-  m_TagString: "Sars\u0131lma"
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

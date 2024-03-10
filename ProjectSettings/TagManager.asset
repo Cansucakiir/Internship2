@@ -16,6 +16,8 @@ TagManager:
   - Ground
   - PlayerChild
   - "Sars\u0131lma2"
+  - Car
+  - Ball
   layers:
   - Default
   - TransparentFX

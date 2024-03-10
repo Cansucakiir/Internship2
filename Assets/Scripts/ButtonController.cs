@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
+    [SerializeField] private PlayerController player;
    
     public void Restart()
     {
